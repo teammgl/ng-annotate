@@ -88,8 +88,8 @@ SourceMapper.prototype.addMapping = function(input, output) {
     });
 }
 
-SourceMapper.prototype.applySourceMap = function (consumer) {
-    this.generator.applySourceMap(consumer);
+SourceMapper.prototype.applySourceMap = function (consumer, inFile) {
+    this.generator.applySourceMap(consumer, inFile);
 }
 
 SourceMapper.prototype.generate = function () {
@@ -112,7 +112,7 @@ module.exports = function generateSourcemap(result, src, nodePositions, fragment
 
     if (mapOpts.inline) {
         if (existingMapObject)
-            mapper.applySourceMap(new SourceMapConsumer(existingMapObject));
+            mapper.applySourceMap(new SourceMapConsumer(existingMapObject), inFile);
 
         result.src = convertSourceMap.removeMapFileComments(result.src) +
             os.EOL +
